@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <scenes>
         <!--Mailbox View Controller-->
@@ -29,10 +28,6 @@
                                                 <rect key="frame" x="0.0" y="79" width="320" height="1202"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="help_label" id="l2x-QP-8Q2">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
                                             <view contentMode="scaleToFill" id="y4a-4k-Uva">
                                                 <rect key="frame" x="0.0" y="79" width="320" height="86"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -53,10 +48,21 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.89009904861450195" green="0.89025199413299561" blue="0.89008945226669312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
-                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" id="stC-EE-tsh">
-                                                <rect key="frame" x="0.0" y="39" width="320" height="42"/>
+                                            <view contentMode="scaleToFill" id="Nsc-ug-ma2">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
+                                                <subviews>
+                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="help_label" id="l2x-QP-8Q2">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" id="stC-EE-tsh">
+                                                        <rect key="frame" x="0.0" y="39" width="320" height="42"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
                                         </subviews>
                                         <inset key="contentInset" minX="0.0" minY="69" maxX="0.0" maxY="0.0"/>
                                         <inset key="scrollIndicatorInsets" minX="0.0" minY="69" maxX="0.0" maxY="0.0"/>
@@ -89,6 +95,7 @@
                         <gestureRecognizers/>
                     </view>
                     <connections>
+                        <outlet property="feedImageView" destination="Oh1-6o-AKT" id="N4v-iT-cto"/>
                         <outlet property="leftIconImageView" destination="EUS-9h-ppS" id="ikr-Rz-9lg"/>
                         <outlet property="rightIconImageView" destination="Uwe-ku-ZJB" id="z92-x7-9BA"/>
                         <outlet property="singleMessageImageView" destination="lxS-8A-HIh" id="yl5-E1-ZCd"/>

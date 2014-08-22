@@ -20,6 +20,7 @@ class MailboxViewController: ViewController {
     @IBOutlet weak var singleMessageView: UIView!
     
     // Image Views
+    @IBOutlet weak var feedImageView: UIImageView!
     @IBOutlet weak var leftIconImageView: UIImageView!
     @IBOutlet weak var rightIconImageView: UIImageView!
     @IBOutlet weak var singleMessageImageView: UIImageView!
@@ -34,6 +35,14 @@ class MailboxViewController: ViewController {
     var topViewPosition: CGFloat!
     var messagePosition: CGFloat!
     var edgeSwipeRecogniser: UIScreenEdgePanGestureRecognizer!
+    
+    // Message state variable
+    // 0 = Default
+    // 1 = Archive
+    // 2 = Delete
+    // 3 = Later
+    // 4 = List
+    var state = 0
     
     
     /*
@@ -168,30 +177,39 @@ class MailboxViewController: ViewController {
             
         } else if gesture.state == UIGestureRecognizerState.Changed {
             var color: UIColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1)
+            state = 0
             
             self.singleMessageImageView.center.x = self.messagePosition + transform.x
             
             // Capture color changes
+            // Archive
             if self.singleMessageImageView.frame.origin.x > 75 {
                 color = UIColor(red: 0.38, green: 0.85, blue: 0.38, alpha: 1)
                 leftImage.image = UIImage(named: "archive_icon")
                 rightImage.alpha = 0
+                state = 1
             }
             
+            // Delete
             if self.singleMessageImageView.frame.origin.x > 230 {
                color = UIColor(red: 0.93, green: 0.33, blue: 0.05, alpha: 1)
                 leftImage.image = UIImage(named: "delete_icon")
+                state = 2
             }
             
+            // Defer
             if self.singleMessageImageView.frame.origin.x < -75 {
                 color = UIColor(red: 1, green: 0.8, blue: 0, alpha: 1)
                 rightImage.image = UIImage(named: "later_icon")
                 leftImage.alpha = 0
+                state = 3
             }
             
+            // List
             if self.singleMessageImageView.frame.origin.x < -230 {
                 color = UIColor(red: 0.84, green: 0.65, blue: 0.45, alpha: 1)
                 rightImage.image = UIImage(named: "list_icon")
+                state = 4
             }
             
             // Set the color
@@ -211,24 +229,73 @@ class MailboxViewController: ViewController {
             }
             
         } else if gesture.state == UIGestureRecognizerState.Ended {
-            
-            UIView.animateWithDuration(0.4,
-                delay: 0,
-                usingSpringWithDamping: 0.6,
-                initialSpringVelocity: 12,
-                options: nil,
-                animations: {
-                    self.singleMessageImageView.center.x = self.messagePosition
-                },
-                completion: { (finished: Bool) in
-                    leftImage.image = UIImage(named: "archive_icon")
-                    rightImage.image = UIImage(named: "later_icon")
-                    
-                    leftImage.alpha = 1
-                    rightImage.alpha = 1
-            })
-            
-            
+            switch state {
+            case 1:
+                println("Case 1")
+                UIView.animateWithDuration(0.5,
+                    animations: {
+                        self.singleMessageImageView.frame.origin.x += 320
+                        leftImage.frame.origin.x += 320
+                        leftImage.alpha = 0
+                    },
+                    completion: { (finished: Bool) in
+                        self.dismissMessage()
+                })
+                
+            case 2:
+                println("Case 2")
+                UIView.animateWithDuration(0.5,
+                    animations: {
+                        self.singleMessageImageView.frame.origin.x += 320
+                        leftImage.frame.origin.x += 320
+                        leftImage.alpha = 0
+                    },
+                    completion: { (finished: Bool) in
+                        self.dismissMessage()
+                })
+                
+            case 3:
+                println("Case 3")
+                UIView.animateWithDuration(0.4,
+                    animations: {
+                        self.singleMessageImageView.frame.origin.x -= 320
+                        rightImage.frame.origin.x -= 320
+                        rightImage.alpha = 0
+                    },
+                    completion: { (finished: Bool) in
+                        self.dismissMessage()
+                })
+                
+            case 4:
+                println("Case 4")
+                UIView.animateWithDuration(0.4,
+                    animations: {
+                        self.singleMessageImageView.frame.origin.x -= 320
+                        rightImage.frame.origin.x -= 320
+                        rightImage.alpha = 0
+                    },
+                    completion: { (finished: Bool) in
+                        self.dismissMessage()
+                })
+                
+            default:
+                println("Default case")
+                UIView.animateWithDuration(0.4,
+                    delay: 0,
+                    usingSpringWithDamping: 0.6,
+                    initialSpringVelocity: 12,
+                    options: nil,
+                    animations: {
+                        self.singleMessageImageView.center.x = self.messagePosition
+                    },
+                    completion: { (finished: Bool) in
+                        leftImage.image = UIImage(named: "archive_icon")
+                        rightImage.image = UIImage(named: "later_icon")
+                        
+                        leftImage.alpha = 1
+                        rightImage.alpha = 1
+                })
+            }
             
         }
     }
@@ -247,6 +314,18 @@ class MailboxViewController: ViewController {
         })
         topViewTapGesture.enabled = false
         topViewPanGesture.enabled = false
+    }
+    
+    // Dismiss message
+    // This function animates the message out of the view and removes it from the super view
+    func dismissMessage() {
+        UIView.animateWithDuration(0.4, animations: {
+            self.singleMessageView.frame.origin.y -= self.singleMessageView.frame.height
+            self.singleMessageView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1)
+            self.feedImageView.frame.origin.y -= self.singleMessageView.frame.height
+            }, completion: {(finished: Bool) in
+                self.singleMessageView.removeFromSuperview()
+        })
     }
 
 }
