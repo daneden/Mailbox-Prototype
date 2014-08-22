@@ -25,11 +25,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feed" id="Oh1-6o-AKT">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feed" id="Oh1-6o-AKT">
                                                 <rect key="frame" x="0.0" y="79" width="320" height="1202"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="help_label" id="l2x-QP-8Q2">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="help_label" id="l2x-QP-8Q2">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -45,18 +45,15 @@
                                                         <rect key="frame" x="25" y="30" width="25" height="25"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     </imageView>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message" id="lxS-8A-HIh">
+                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message" id="lxS-8A-HIh">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <gestureRecognizers/>
-                                                        <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="NBd-K4-zpl" appends="YES" id="gbq-qp-iZK"/>
-                                                        </connections>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.89009904861450195" green="0.89025199413299561" blue="0.89008945226669312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" id="stC-EE-tsh">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" id="stC-EE-tsh">
                                                 <rect key="frame" x="0.0" y="39" width="320" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -69,7 +66,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </scrollView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav" id="bvN-7u-iJJ">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav" id="bvN-7u-iJJ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
@@ -86,10 +83,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="cRa-Tp-ydp" appends="YES" id="oe2-7I-TUp"/>
-                                    <outletCollection property="gestureRecognizers" destination="FC3-7l-4r2" appends="YES" id="DxW-3N-LGU"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -97,31 +90,13 @@
                     </view>
                     <connections>
                         <outlet property="leftIconImageView" destination="EUS-9h-ppS" id="ikr-Rz-9lg"/>
-                        <outlet property="messageViewPanGesture" destination="NBd-K4-zpl" id="YU2-9B-9Yj"/>
                         <outlet property="rightIconImageView" destination="Uwe-ku-ZJB" id="z92-x7-9BA"/>
                         <outlet property="singleMessageImageView" destination="lxS-8A-HIh" id="yl5-E1-ZCd"/>
                         <outlet property="singleMessageView" destination="y4a-4k-Uva" id="im0-pq-Pcu"/>
                         <outlet property="topView" destination="P9l-HZ-rnQ" id="Y70-H8-OKY"/>
-                        <outlet property="topViewPanGesture" destination="FC3-7l-4r2" id="Wvd-Qd-Dx5"/>
-                        <outlet property="topViewTapGesture" destination="cRa-Tp-ydp" id="9zM-79-hdl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer enabled="NO" id="cRa-Tp-ydp" userLabel="Feed View Tap Gesture Recognizer">
-                    <connections>
-                        <action selector="onTopViewTap:" destination="vXZ-lx-hvc" id="3hN-z2-6MS"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <panGestureRecognizer enabled="NO" minimumNumberOfTouches="1" id="FC3-7l-4r2" userLabel="Feed View Pan Gesture Recognizer">
-                    <connections>
-                        <action selector="onTopViewPan:" destination="vXZ-lx-hvc" id="yXI-Zu-Jde"/>
-                    </connections>
-                </panGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="NBd-K4-zpl" userLabel="Message Pan Gesture Recognizer">
-                    <connections>
-                        <action selector="onMessagePan:" destination="vXZ-lx-hvc" id="Xsa-b3-5rG"/>
-                    </connections>
-                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="162.66666666666666" y="385.29333333333335"/>
         </scene>

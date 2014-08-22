@@ -25,9 +25,10 @@ class MailboxViewController: ViewController {
     @IBOutlet weak var singleMessageImageView: UIImageView!
     
     // Declare gestures
-    @IBOutlet var topViewTapGesture: UITapGestureRecognizer!
-    @IBOutlet var topViewPanGesture: UIPanGestureRecognizer!
-    @IBOutlet var messageViewPanGesture: UIPanGestureRecognizer!
+    var topViewTapGesture: UITapGestureRecognizer!
+    var topViewPanGesture: UIPanGestureRecognizer!
+    var messageViewPanGesture: UIPanGestureRecognizer!
+    var edgePanGesture: UIScreenEdgePanGestureRecognizer!
     
     // Set up global vars
     var topViewPosition: CGFloat!
@@ -52,13 +53,26 @@ class MailboxViewController: ViewController {
         topView.layer.shadowRadius = 10
         topView.layer.shadowOpacity = 0.75
         
-        // Set up our edge swipe gesture recogniser
-        var edgeSwipeRecogniser = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgeSwipeGesture:")
-        edgeSwipeRecogniser.edges = UIRectEdge.Left
-        view.addGestureRecognizer(edgeSwipeRecogniser)
+        // Add edge pan gesture
+        edgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgeSwipeGesture:")
+        edgePanGesture.edges = UIRectEdge.Left
+        view.addGestureRecognizer(edgePanGesture)
         
-        var messagePanRecogniser = UIPanGestureRecognizer(target: self, action: "onMessagePan:")
-        view.addGestureRecognizer(messagePanRecogniser)
+        // Add topView tap gesture
+        // This is enabled after the menu is displayed
+        topViewTapGesture = UITapGestureRecognizer(target: self, action: "onMenuButtonPress:")
+        topViewTapGesture.enabled = false
+        topView.addGestureRecognizer(topViewTapGesture)
+        
+        // Add topView pan gesture
+        // This is enabled after the menu is displayed
+        topViewPanGesture = UIPanGestureRecognizer(target: self, action: "onTopViewPan:")
+        topViewPanGesture.enabled = false
+        topView.addGestureRecognizer(topViewPanGesture)
+        
+        // Add messageView pan gesture
+        messageViewPanGesture = UIPanGestureRecognizer(target: self, action: "onMessagePan:")
+        singleMessageView.addGestureRecognizer(messageViewPanGesture)
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,12 +106,12 @@ class MailboxViewController: ViewController {
     
     // Reveal menu when swiping entire view from screen edge
     // This gesture is disabled when menu is opened
-    func onEdgeSwipeGesture(gesture: UIScreenEdgePanGestureRecognizer) {
+    @IBAction func onEdgeSwipeGesture(gesture: UIScreenEdgePanGestureRecognizer) {
         var point = gesture.locationInView(view)
         
         if gesture.state == UIGestureRecognizerState.Began {
             
-            
+
         } else if gesture.state == UIGestureRecognizerState.Changed {
             
             self.topView.frame.origin.x = self.topViewPosition + point.x
@@ -143,27 +157,78 @@ class MailboxViewController: ViewController {
     
     // Message pan gesture
     @IBAction func onMessagePan(gesture: UIPanGestureRecognizer) {
+        
         var point = gesture.locationInView(view)
         var transform = gesture.translationInView(view)
+        var leftImage = self.leftIconImageView
+        var rightImage = self.rightIconImageView
         
         if gesture.state == UIGestureRecognizerState.Began {
             
             
         } else if gesture.state == UIGestureRecognizerState.Changed {
+            var color: UIColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1)
             
             self.singleMessageImageView.center.x = self.messagePosition + transform.x
+            
+            // Capture color changes
+            if self.singleMessageImageView.frame.origin.x > 75 {
+                color = UIColor(red: 0.38, green: 0.85, blue: 0.38, alpha: 1)
+                leftImage.image = UIImage(named: "archive_icon")
+                rightImage.alpha = 0
+            }
+            
+            if self.singleMessageImageView.frame.origin.x > 230 {
+               color = UIColor(red: 0.93, green: 0.33, blue: 0.05, alpha: 1)
+                leftImage.image = UIImage(named: "delete_icon")
+            }
+            
+            if self.singleMessageImageView.frame.origin.x < -75 {
+                color = UIColor(red: 1, green: 0.8, blue: 0, alpha: 1)
+                rightImage.image = UIImage(named: "later_icon")
+                leftImage.alpha = 0
+            }
+            
+            if self.singleMessageImageView.frame.origin.x < -230 {
+                color = UIColor(red: 0.84, green: 0.65, blue: 0.45, alpha: 1)
+                rightImage.image = UIImage(named: "list_icon")
+            }
+            
+            // Set the color
+            self.singleMessageView.backgroundColor = color
+            
+            // Capture image transformations
+            if transform.x > 75 {
+                leftImage.frame.origin.x = (25 + transform.x) - 75
+            } else {
+                leftImage.frame.origin.x = 25
+            }
+            
+            if transform.x < -75 {
+                rightImage.frame.origin.x = (275 + transform.x) + 75
+            } else {
+                rightImage.frame.origin.x = 275
+            }
             
         } else if gesture.state == UIGestureRecognizerState.Ended {
             
             UIView.animateWithDuration(0.4,
                 delay: 0,
-                usingSpringWithDamping: 0.4,
-                initialSpringVelocity: 15,
+                usingSpringWithDamping: 0.6,
+                initialSpringVelocity: 12,
                 options: nil,
                 animations: {
                     self.singleMessageImageView.center.x = self.messagePosition
                 },
-                completion: nil)
+                completion: { (finished: Bool) in
+                    leftImage.image = UIImage(named: "archive_icon")
+                    rightImage.image = UIImage(named: "later_icon")
+                    
+                    leftImage.alpha = 1
+                    rightImage.alpha = 1
+            })
+            
+            
             
         }
     }
