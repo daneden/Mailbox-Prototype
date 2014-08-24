@@ -14,3 +14,4 @@
 - Swipe edge to reveal menu
 
 ## GIF
+![](https://raw.githubusercontent.com/daneden/Mailbox-Prototype/master/Mailbox-Prototype.gif)

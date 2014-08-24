@@ -118,20 +118,6 @@
             </objects>
             <point key="canvasLocation" x="162.66666666666666" y="385.29333333333335"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="ELf-by-rEF">
-            <objects>
-                <viewController id="hkF-Kb-Mg9" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Suu-J5-w8w">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="noC-7q-jhN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="613" y="385"/>
-        </scene>
     </scenes>
     <resources>
         <image name="archive_icon" width="25" height="25"/>
