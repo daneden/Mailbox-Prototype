@@ -101,11 +101,71 @@
                         <outlet property="singleMessageImageView" destination="lxS-8A-HIh" id="yl5-E1-ZCd"/>
                         <outlet property="singleMessageView" destination="y4a-4k-Uva" id="im0-pq-Pcu"/>
                         <outlet property="topView" destination="P9l-HZ-rnQ" id="Y70-H8-OKY"/>
+                        <segue destination="hig-BJ-W7l" kind="modal" identifier="rescheduleSegue" modalTransitionStyle="crossDissolve" id="gna-Ge-ZYr"/>
+                        <segue destination="9c4-na-av2" kind="modal" identifier="listSegue" modalTransitionStyle="crossDissolve" id="pvY-GA-Smf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="162.66666666666666" y="385.29333333333335"/>
+        </scene>
+        <!--Blur View Controller-->
+        <scene sceneID="ZOg-Vk-Gr1">
+            <objects>
+                <viewController id="hig-BJ-W7l" customClass="BlurViewController" customModule="Mailbox_Prototype" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mDv-cJ-GG1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reschedule" id="0cG-0O-9dL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="QNf-yC-k3e" appends="YES" id="Iw8-aU-NXw"/>
+                        </connections>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yPw-pN-PEs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QNf-yC-k3e">
+                    <connections>
+                        <action selector="onTap:" destination="hig-BJ-W7l" id="DVP-is-UzK"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="647" y="385"/>
+        </scene>
+        <!--Blur View Controller-->
+        <scene sceneID="Cr9-OP-JFW">
+            <objects>
+                <viewController id="9c4-na-av2" customClass="BlurViewController" customModule="Mailbox_Prototype" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5J9-ls-eGj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list" id="Ksl-oM-0XM">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="QoY-Qh-GkN" appends="YES" id="66N-4G-bTK"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jCF-tL-NzE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QoY-Qh-GkN">
+                    <connections>
+                        <action selector="onTap:" destination="9c4-na-av2" id="NaG-Do-A60"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="647" y="1055"/>
         </scene>
     </scenes>
     <resources>
@@ -113,9 +173,11 @@
         <image name="feed" width="320" height="1202"/>
         <image name="help_label" width="320" height="37"/>
         <image name="later_icon" width="25" height="25"/>
+        <image name="list" width="320" height="568"/>
         <image name="menu" width="320" height="568"/>
         <image name="message" width="320" height="86"/>
         <image name="nav" width="320" height="65"/>
+        <image name="reschedule" width="320" height="568"/>
         <image name="search" width="320" height="42"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -13,6 +13,7 @@
 		7107EB5519A5130F00314A42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7107EB5419A5130F00314A42 /* Images.xcassets */; };
 		7107EB6119A5130F00314A42 /* Mailbox_PrototypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7107EB6019A5130F00314A42 /* Mailbox_PrototypeTests.swift */; };
 		7107EB6C19A5135600314A42 /* MailboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7107EB6B19A5135600314A42 /* MailboxViewController.swift */; };
+		D98D09AB19A9B0FC00C8C678 /* BlurViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D09AA19A9B0FC00C8C678 /* BlurViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		7107EB5F19A5130F00314A42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7107EB6019A5130F00314A42 /* Mailbox_PrototypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mailbox_PrototypeTests.swift; sourceTree = "<group>"; };
 		7107EB6B19A5135600314A42 /* MailboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailboxViewController.swift; sourceTree = "<group>"; };
+		D98D09AA19A9B0FC00C8C678 /* BlurViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				7107EB6B19A5135600314A42 /* MailboxViewController.swift */,
+				D98D09AA19A9B0FC00C8C678 /* BlurViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				7107EB5019A5130F00314A42 /* ViewController.swift in Sources */,
 				7107EB4E19A5130F00314A42 /* AppDelegate.swift in Sources */,
 				7107EB6C19A5135600314A42 /* MailboxViewController.swift in Sources */,
+				D98D09AB19A9B0FC00C8C678 /* BlurViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

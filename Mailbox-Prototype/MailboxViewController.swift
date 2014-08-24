@@ -181,6 +181,9 @@ class MailboxViewController: ViewController {
             
             self.singleMessageImageView.center.x = self.messagePosition + transform.x
             
+            leftImage.alpha = (transform.x/75) - 0.1
+            rightImage.alpha = (-transform.x/75) - 0.1
+            
             // Capture color changes
             // Archive
             if self.singleMessageImageView.frame.origin.x > 75 {
@@ -263,7 +266,7 @@ class MailboxViewController: ViewController {
                         rightImage.alpha = 0
                     },
                     completion: { (finished: Bool) in
-                        self.dismissMessage()
+                        self.performSegueWithIdentifier("rescheduleSegue", sender: self)
                 })
                 
             case 4:
@@ -275,7 +278,7 @@ class MailboxViewController: ViewController {
                         rightImage.alpha = 0
                     },
                     completion: { (finished: Bool) in
-                        self.dismissMessage()
+                        self.performSegueWithIdentifier("listSegue", sender: self)
                 })
                 
             default:
@@ -304,6 +307,8 @@ class MailboxViewController: ViewController {
     /*
     // MARK: - Global Functions
     */
+    
+    
     
     // Close menu when tapping on the feed view
     // This gesture is disabled when the menu is closed
