@@ -18,18 +18,23 @@ class MailboxViewController: ViewController {
     // Declare views
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var singleMessageView: UIView!
+    @IBOutlet weak var feedScrollView: UIScrollView!
     
     // Image Views
     @IBOutlet weak var feedImageView: UIImageView!
     @IBOutlet weak var leftIconImageView: UIImageView!
     @IBOutlet weak var rightIconImageView: UIImageView!
     @IBOutlet weak var singleMessageImageView: UIImageView!
+    @IBOutlet weak var rescheduleImageView: UIImageView!
+    @IBOutlet weak var listImageView: UIImageView!
     
     // Declare gestures
     var topViewTapGesture: UITapGestureRecognizer!
     var topViewPanGesture: UIPanGestureRecognizer!
     var messageViewPanGesture: UIPanGestureRecognizer!
     var edgePanGesture: UIScreenEdgePanGestureRecognizer!
+    var listModalTapGesture: UITapGestureRecognizer!
+    var rescheduleModalTapGesture: UITapGestureRecognizer!
     
     // Set up global vars
     var topViewPosition: CGFloat!
@@ -82,6 +87,13 @@ class MailboxViewController: ViewController {
         // Add messageView pan gesture
         messageViewPanGesture = UIPanGestureRecognizer(target: self, action: "onMessagePan:")
         singleMessageView.addGestureRecognizer(messageViewPanGesture)
+        
+        listModalTapGesture = UITapGestureRecognizer(target: self, action: "onListModalTap")
+        listImageView.addGestureRecognizer(listModalTapGesture)
+        
+        rescheduleModalTapGesture = UITapGestureRecognizer(target: self, action: "onRescheduleModalTap")
+        rescheduleImageView.addGestureRecognizer(rescheduleModalTapGesture)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -146,10 +158,7 @@ class MailboxViewController: ViewController {
         var point = gesture.locationInView(view)
         var velocity = gesture.velocityInView(view)
         
-        if gesture.state == UIGestureRecognizerState.Began {
-            
-            
-        } else if gesture.state == UIGestureRecognizerState.Changed {
+        if gesture.state == UIGestureRecognizerState.Changed {
             
             self.topView.frame.origin.x = self.topViewPosition + point.x
             
@@ -172,10 +181,7 @@ class MailboxViewController: ViewController {
         var leftImage = self.leftIconImageView
         var rightImage = self.rightIconImageView
         
-        if gesture.state == UIGestureRecognizerState.Began {
-            
-            
-        } else if gesture.state == UIGestureRecognizerState.Changed {
+        if gesture.state == UIGestureRecognizerState.Changed {
             var color: UIColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1)
             state = 0
             
@@ -266,7 +272,11 @@ class MailboxViewController: ViewController {
                         rightImage.alpha = 0
                     },
                     completion: { (finished: Bool) in
-                        self.performSegueWithIdentifier("rescheduleSegue", sender: self)
+                        self.view.bringSubviewToFront(self.rescheduleImageView)
+                        self.rescheduleImageView.hidden = false
+                        UIView.animateWithDuration(0.3, animations: {
+                            self.rescheduleImageView.alpha = 1.0
+                            }, completion: nil)
                 })
                 
             case 4:
@@ -278,7 +288,11 @@ class MailboxViewController: ViewController {
                         rightImage.alpha = 0
                     },
                     completion: { (finished: Bool) in
-                        self.performSegueWithIdentifier("listSegue", sender: self)
+                        self.view.bringSubviewToFront(self.listImageView)
+                        self.listImageView.hidden = false
+                        UIView.animateWithDuration(0.3, animations: {
+                            self.listImageView.alpha = 1.0
+                            }, completion: nil)
                 })
                 
             default:
@@ -328,9 +342,28 @@ class MailboxViewController: ViewController {
             self.singleMessageView.frame.origin.y -= self.singleMessageView.frame.height
             self.singleMessageView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1)
             self.feedImageView.frame.origin.y -= self.singleMessageView.frame.height
+            self.feedScrollView.contentSize.height -= self.singleMessageView.frame.height
             }, completion: {(finished: Bool) in
                 self.singleMessageView.removeFromSuperview()
         })
+    }
+    
+    func onListModalTap() {
+        UIView.animateWithDuration(0.3, animations: {
+            self.listImageView.alpha = 0.0
+        }) { (finished) -> Void in
+            self.listImageView.hidden = true
+            self.dismissMessage()
+        }
+    }
+    
+    func onRescheduleModalTap() {
+        UIView.animateWithDuration(0.3, animations: {
+            self.rescheduleImageView.alpha = 0.0
+            }) { (finished) -> Void in
+                self.rescheduleImageView.hidden = true
+                self.dismissMessage()
+        }
     }
 
 }
